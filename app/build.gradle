@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    signingConfigs {
+        release {
+            keyAlias 'food'
+            keyPassword '123456'
+            storeFile file('/Users/sunhuahui/Desktop/work/android/github/Food3/app/keystore/food.jks')
+            storePassword '123456'
+        }
+    }
+
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        applicationId "com.huaye.food"
+        minSdkVersion 17
+        targetSdkVersion 22
+        multiDexEnabled true
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':step')
+    compile 'me.iwf.photopicker:PhotoPicker:0.9.10@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.bumptech.glide:glide:4.2.0'
+    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    //    compile 'com.google.android.gms:play-services-maps:11.4.2'
+    compile 'com.google.android.gms:play-services:11.6.0'
+    //    compile 'com.google.android.gms:play-services-location:11.4.2'
+    compile 'com.yanzhenjie.nohttp:nohttp:1.1.4'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.33'
+    compile 'com.tencent.bugly:crashreport:2.6.6.1'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明op确的版本号，例如2.1.9
+    compile 'com.tencent.bugly:nativecrashreport:3.3.1'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.wei.android.lib:fingerprintidentify:1.2.1'
+    compile 'com.wang.avi:library:2.1.3'
+}
